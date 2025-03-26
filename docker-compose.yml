@@ -26,7 +26,7 @@ services:
       timeout: 30s
       retries: 5
       start_period: 15s
-    restart: unless-stopped
+    restart: always
     volumes:
       - /home/ollama/.ollama:/root/.ollama
     networks:
@@ -36,7 +36,7 @@ services:
     image: searxng/searxng:latest
     volumes:
       - ./searxng:/etc/searxng
-    restart: unless-stopped
+    restart: always
     networks:
       default:
 
@@ -66,7 +66,7 @@ services:
       - USE_CUDA_DOCKER=${USE_CUDA_DOCKER:-false}
       - DATABASE_URL=${DATABASE_URL:-postgresql://postgress:P@55w0rd@postgres:5432/postgres}
 
-    restart: unless-stopped
+    restart: always
     volumes:
       - open_webui:/app/backend/data
     networks:
