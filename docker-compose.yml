@@ -19,6 +19,7 @@ services:
       - /dev/dri:/dev/dri
     environment:
       - HSA_OVERRIDE_GFX_VERSION=${HSA_OVERRIDE_GFX_VERSION:-}
+    privileged: true
 
     healthcheck:
       test: timeout 5 bash -c "</dev/tcp/localhost/11434"
