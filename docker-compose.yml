@@ -17,6 +17,8 @@ services:
     devices:
       - /dev/kfd:/dev/kfd
       - /dev/dri:/dev/dri
+    environment:
+      - HSA_OVERRIDE_GFX_VERSION=${HSA_OVERRIDE_GFX_VERSION:-}
 
     healthcheck:
       test: timeout 5 bash -c "</dev/tcp/localhost/11434"
