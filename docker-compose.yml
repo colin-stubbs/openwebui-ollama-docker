@@ -21,6 +21,7 @@ services:
       - /opt/amdgpu:/opt/amdgpu:ro
       - /home/ollama/.ollama:/root/.ollama
     environment:
+      - OLLAMA_MAX_LOADED_MODELS=${OLLAMA_MAX_LOADED_MODELS:-1}
       - HSA_OVERRIDE_GFX_VERSION=${HSA_OVERRIDE_GFX_VERSION:-}
 
     healthcheck:
