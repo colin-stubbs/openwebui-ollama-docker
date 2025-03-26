@@ -19,6 +19,7 @@ services:
       - /dev/dri:/dev/dri
     volumes:
       - /opt/amdgpu:/opt/amdgpu:ro
+      - /home/ollama/.ollama:/root/.ollama
     environment:
       - HSA_OVERRIDE_GFX_VERSION=${HSA_OVERRIDE_GFX_VERSION:-}
     privileged: true
@@ -30,8 +31,6 @@ services:
       retries: 5
       start_period: 15s
     restart: always
-    volumes:
-      - /home/ollama/.ollama:/root/.ollama
     networks:
       default:
 
