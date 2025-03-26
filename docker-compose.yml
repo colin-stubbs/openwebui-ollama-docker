@@ -15,8 +15,8 @@ services:
     # AMD GPU
     image: ollama/ollama:rocm
     devices:
-      - /dev/kfd
-      - /dev/dri
+      - /dev/kfd:/dev/kfd
+      - /dev/dri:/dev/dri
 
     healthcheck:
       test: timeout 5 bash -c "</dev/tcp/localhost/11434"
