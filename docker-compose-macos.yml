@@ -3,6 +3,10 @@ services:
     image: searxng/searxng:latest
     volumes:
       - ./searxng:/etc/searxng
+    environment:
+      - SEARXNG_PORT=${SEARXNG_PORT:-8080}
+      - SEARXNG_BIND_ADDRESS=${SEARXNG_BIND_ADDRESS:-0.0.0.0}
+      - SEARXNG_URL=${SEARXNG_URL:-/}
     restart: always
     networks:
       default:
