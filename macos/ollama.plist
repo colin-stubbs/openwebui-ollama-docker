@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>ollama</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>DISABLED_OLLAMA_HOST</key>
+        <string>0.0.0.0:11434</string>
+    </dict>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/bin/bash</string>
+      <string>-l</string>
+      <string>-c</string>
+      <string>/opt/homebrew/bin/ollama serve 1>~/.ollama/stdout.log 2>~/.ollama/stderr.log</string>
+    </array>
+  </dict>
+</plist>

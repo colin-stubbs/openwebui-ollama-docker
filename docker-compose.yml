@@ -11,19 +11,19 @@ services:
     #         - driver: nvidia
     #           count: all
     #           capabilities: [gpu]
-#    
-#    # AMD GPU
-#    image: ollama/ollama:rocm
-#    devices:
-#      - /dev/kfd:/dev/kfd
-#      - /dev/dri:/dev/dri
-#    volumes:
-#      - /opt/amdgpu:/opt/amdgpu:ro
-#      - /home/ollama/.ollama:/root/.ollama
-#    environment:
-#      - OLLAMA_MAX_LOADED_MODELS=${OLLAMA_MAX_LOADED_MODELS:-1}
-#      - HSA_OVERRIDE_GFX_VERSION=${HSA_OVERRIDE_GFX_VERSION:-}
-#
+
+    # AMD GPU
+    # image: ollama/ollama:rocm
+    # devices:
+    #   - /dev/kfd:/dev/kfd
+    #   - /dev/dri:/dev/dri
+    # volumes:
+    #   - /opt/amdgpu:/opt/amdgpu:ro
+    #   - /home/ollama/.ollama:/root/.ollama
+    # environment:
+    #   - OLLAMA_MAX_LOADED_MODELS=${OLLAMA_MAX_LOADED_MODELS:-1}
+    #   - HSA_OVERRIDE_GFX_VERSION=${HSA_OVERRIDE_GFX_VERSION:-}
+
 #    healthcheck:
 #      test: timeout 5 bash -c "</dev/tcp/localhost/11434"
 #      interval: 10s
@@ -38,6 +38,11 @@ services:
     image: searxng/searxng:latest
     volumes:
       - ./searxng:/etc/searxng
+    environment:
+      - SEARXNG_SECRET=${SEARXNG_SECRET:-secret}
+      - SEARXNG_BIND_ADDRESS=${SEARXNG_BIND_ADDRESS:-0.0.0.0}
+      - SEARXNG_PORT=${SEARXNG_PORT:-8080}
+      - SEARXNG_URL=${SEARXNG_URL:-/}
     restart: always
     networks:
       default:
@@ -47,6 +52,8 @@ services:
     ports:
       - "8080:8080"
     depends_on:
+#      ollama:
+#        condition: service_healthy
       postgres:
         condition: service_healthy
     environment:
@@ -64,7 +71,7 @@ services:
       - OAUTH_MERGE_ACCOUNTS_BY_EMAIL=${OAUTH_MERGE_ACCOUNTS_BY_EMAIL:-false}
       - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:-secret}
       - USE_CUDA_DOCKER=${USE_CUDA_DOCKER:-false}
-      - DATABASE_URL=${DATABASE_URL:-postgresql://postgress:P@55w0rd@postgres:5432/postgres}
+      - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:P@55w0rd@postgres:5432/postgres}
 
     restart: always
     volumes:
